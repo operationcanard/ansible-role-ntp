@@ -1,6 +1,7 @@
 ---
 ntp_enabled: true
 ntp_timezone: Etc/UTC
+ntp_air_gapped: false
 
 # ntp_daemon: [various]
 # ntp_package: ntp
@@ -18,9 +19,9 @@ ntp_servers:
   - "2{{ '.' + ntp_area if ntp_area else '' }}.pool.ntp.org iburst"
   - "3{{ '.' + ntp_area if ntp_area else '' }}.pool.ntp.org iburst"
 
-ntp_restrict:
-  - "127.0.0.1"
-  - "::1"
+#ntp_restrict:
+#  - "127.0.0.1"
+#  - "::1"
 
 ntp_cron_handler_enabled: false
 

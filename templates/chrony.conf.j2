@@ -4,6 +4,7 @@
 {% for server in ntp_servers %}
 server {{ server }}
 {% endfor %}
+
 # Use public servers from the pool.ntp.org project.
 # Please consider joining the pool (http://www.pool.ntp.org/join.html).
 
@@ -26,9 +27,18 @@ rtcsync
 
 # Allow NTP client access from local network.
 #allow 192.168.0.0/16
+{% if ntp_restrict is defined %}
+{% for item in ntp_restrict %}
+allow {{ item }}
+{% endfor %}
+{% endif %}
 
 # Serve time even if not synchronized to a time source.
 #local stratum 10
+{% if ntp_air_gapped is sameas true %}
+local stratum 8
+manual
+{% endif %}
 
 # Specify file containing keys for NTP authentication.
 #keyfile /etc/chrony.keys
